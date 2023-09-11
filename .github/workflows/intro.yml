@@ -2,29 +2,29 @@ name: Intro to github action
 
 # les "déclencheurs"
 on:
-	push:
+  push:
 
 jobs:
-	build-test:
-	runs-on: ubuntu-latest
-	steps:
-		- uses: actions/checkout@v2
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
 
-		- uses: oven-sh/setup-bun@v1
-			with:
-				bun-version: latest
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
 
-		- name: Install dependencies
-			run: bun install
+      - name: Install dependencies
+        run: bun install
 
-		- name: Build
-			run: bun run build
+      - name: Build
+        run: bun run build
 
-		- name: Run the serv
-			run: | 
-				bun run preview &
-				sleep 5
+      - name: Run the serv
+        run: | 
+          bun run preview &
+          sleep 5
 
-		- name: curl the serv
-			run: curl -I https://localhost:4173
+      - name: curl the serv
+        run: curl -I https://localhost:4173
         
