@@ -27,5 +27,5 @@ jobs:
           sleep 5
 
       - name: curl the serv
-        run: curl -I https://localhost:4173
+        run: curl -I http://localhost:4173
         
