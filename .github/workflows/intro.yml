@@ -61,7 +61,7 @@ jobs:
 
       - name: push files
         run: |
-        git config --global user.email "guenier.samuel@gmail.com" && git config --global user.name "Samuel GUENIER" && git add ./static/* && git commit -m "update static files" && git push
+          git config --global user.email "guenier.samuel@gmail.com" && git config --global user.name "Samuel GUENIER" && git add ./static/* && git commit -m "update static files" && git push
 
 
 
