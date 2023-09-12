@@ -35,7 +35,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      - name: Build
+      - name: Install
         run: pnpm install
 
       - name: Build
@@ -45,6 +45,12 @@ jobs:
         run: |
           pnpm run preview &
           sleep 5
+
+      - name: Generate snapshot
+        run: docker run -i --init --cap-add=SYS_ADMIN --network host -v ./gen:/home/pptruser/gen ghcr.io/puppeteer/puppeteer:latest node -e "$(cat snapshot.js)" http://127.0.0.1:4173 ./gen
+
+      - name: Move in static dir
+        run: mv ./gen/* /static/
 
       - name: Curl the server
         run: curl -I http://localhost:4173
