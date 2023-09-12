@@ -57,7 +57,7 @@ jobs:
         run: docker run -i --init --cap-add=SYS_ADMIN --network host -v ./gen:/home/pptruser/gen ghcr.io/puppeteer/puppeteer:latest node -e "$(cat snapshot.js)" http://localhost:4173 ./gen
 
       - name: remove localhost from mhtml
-        run: sed -i 's/localhost:4173/https:\/\/samuelguenier.fr/g' ./gen/*.mhtml
+        run: sed -i 's/http:\/\/localhost:4173/https:\/\/cv.bnei/g' ./gen/*.mhtml
 
       - name: Move in static dir
         run: mv ./gen/* ./static/
