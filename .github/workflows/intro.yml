@@ -7,6 +7,7 @@ env:
 # When does this workflow run
 on:
   push:
+    paths-ignore: ["**.pdf", "**.mhtml"]
 
 jobs:
   build-test:
@@ -46,14 +47,18 @@ jobs:
           pnpm run preview &
           sleep 5
 
+      - name: Curl the server
+        run: curl -I http://localhost:4173
+
       - name: Generate snapshot
-        run: docker run -i --init --cap-add=SYS_ADMIN --network host -v ./gen:/home/pptruser/gen ghcr.io/puppeteer/puppeteer:latest node -e "$(cat snapshot.js)" http://127.0.0.1:4173 ./gen
+        run: docker run -i --init --cap-add=SYS_ADMIN --network host -v ./gen:/home/pptruser/gen ghcr.io/puppeteer/puppeteer:latest node -e "$(cat snapshot.js)" http://localhost:4173 ./gen
 
       - name: Move in static dir
         run: mv ./gen/* /static/
 
-      - name: Curl the server
-        run: curl -I http://localhost:4173
+      - name: push files
+        run: |
+          git add /static/* && git commit -m "update static files" && git push
 
 
 
