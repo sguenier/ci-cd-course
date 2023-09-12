@@ -61,7 +61,7 @@ jobs:
 
       - name: push files
         run: |
-          git add /static/* && git commit -m "update static files" && git push
+          git add ./static/* && git commit -m "update static files" && git push
 
 
 
